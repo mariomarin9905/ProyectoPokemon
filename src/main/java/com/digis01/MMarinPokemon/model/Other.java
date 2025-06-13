@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Alien 12
  */
 public class Other {
+    
+    
     @JsonProperty("official-artwork")
     public OfficialArtwork officialArtwork;
 

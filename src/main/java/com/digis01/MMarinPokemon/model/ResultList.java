@@ -7,7 +7,7 @@ import java.util.List;
 public class ResultList {
     public int count;
     public String next;
-    public String previus;
+    public String previous;
     public List<Pokemon> results;
     
 }
