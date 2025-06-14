@@ -1,5 +1,4 @@
 package com.digis01.MMarinPokemon.Controller;
-
 import com.digis01.MMarinPokemon.model.GenerationIX;
 import com.digis01.MMarinPokemon.model.Icon;
 import com.digis01.MMarinPokemon.model.Pokemon;
@@ -99,9 +98,11 @@ public class PokemonController {
     }
     
     @GetMapping("/Pokemon/{name}")
-    public String Pokemon(@PathVariable String name){
+    public String Pokemon(@PathVariable String name, Model model){
         try {
-            
+            this.restTemplate = new RestTemplate();
+            Pokemon pokemon = this.GetPokemonCard(this.BASEURL+"/"+name);
+            model.addAttribute("pokemon", pokemon);
             return "Pokemon";
         } catch (Exception e) {
             return "";

@@ -4,30 +4,35 @@
     <main layout:fragment = "main">
         <div class ="mt-5 mb-5  row">
             <div class="col-3" th:each="pokemon : ${pokemons}">
-                <div class="tarjeta-base p-1 mb-3 rounded-4">
-                    <a th:href="@{/PokemonWeb/Pokemon/{name}(name = ${pokemon.name})}" class="stretched-link"></a>
+                <div class="tarjeta-base p-1 mb-3 rounded-4" th:id="${pokemon.name}" onclick="redirectPokemon(this)"  >
+                    
                     <div th:class="|targeta m-1 rounded-4 ${pokemon.species.color.name}-card|">
                         <div th:class = "|p-1 fs-5 col-12 d-flex justify-content-evenly text-capitalize fw-bold|"> 
                             <p th:text = "${pokemon.name}"></p>
                             <p th:text = "|N° ${pokemon.id}|"></p>                            
                         </div>
                         <div class = "text-center targeta-imagen m-3">
-                             <img th:src="${pokemon.sprites.other.officialArtwork.front_default}" style="width: 15rem;" class="card-img-top" alt="...">
+                            <img th:src="${pokemon.sprites.other.officialArtwork.front_default}" style="width: 15rem;" class="card-img-top" alt="...">
                         </div>
                         <div class="col-12 d-flex justify-content-evenly p-2">
-                            <div th:each="typeList : ${pokemon.types}" >
-                                    <img th:src="${typeList.type.sprites.generationIX.scarletViolet.name_icon}" style="width: 8rem;" class="card-img-top" alt="...">                                
+                            <div th:each="typeList : ${pokemon.types}">
+                                <img th:src="${typeList.type.sprites.generationIX.scarletViolet.name_icon}" style="width: 8rem;" class="card-img-top" alt="...">                                
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class = " mb-5 row flex-row-reverse g-2">
-                    <a th:if ="${next}"  th:href = "@{'/PokemonWeb?page=' +${page+1}  }"  class="fs-5 col-5 button m-5"> Siguiente</a>
-                    <a th:if = "${previous}" th:href = "@{'/PokemonWeb?page=' +${page-1} }" class="fs-5 col-5 button m-5"> Anterior</a>
-            </div>
-        </div>
 
+        </div>
+        <div class = " mb-5 row flex-row-reverse g-2">
+            <a th:if ="${next}"  th:href = "@{'/PokemonWeb?page=' +${page+1}  }"  class="fs-5 col-5 button m-5"> Siguiente</a>
+            <a th:if = "${previous}" th:href = "@{'/PokemonWeb?page=' +${page-1} }" class="fs-5 col-5 button m-5"> Anterior</a>
+        </div>
+        <script>
+            function redirectPokemon(elemento){
+                window.location.href = "http://localhost:8080/PokemonWeb/Pokemon/"+elemento.id;                
+            }
+        </script>  
     </main>
 </html>
